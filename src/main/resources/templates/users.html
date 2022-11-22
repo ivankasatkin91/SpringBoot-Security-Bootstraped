@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--<html></html>-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>User's list</title>
+</head>
+<body>
+
+<div><h2>List of Users:</h2></div>
+
+<div>
+    <table border="1" , style="width:600px">
+        <thread>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Username</th>
+                <th>Roles</th>
+                <th>Edit Entry</th>
+            </tr>
+        </thread>
+        <tbody>
+        <th:block th:each="user : ${users}">
+            <tr>
+                <td th:text="${user.getName()}">...</td>
+                <td th:text="${user.getSurname()}">...</td>
+                <td th:text="${user.getUsername()}">...</td>
+                <td th:text="${user.getRoles()}">...</td>
+                <td>
+                    <a th:href="@{admin/edit/{id}(id=${user.getId()})}">
+                        <button>edit</button>
+                    </a>
+                    <br>
+                    <form th:method="delete" th:action="@{admin/delete/{id}(id=${user.getId()})}">
+                        <input type="submit" value="delete"/>
+                    </form>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+<div>
+    <a href="/admin/new">
+        <button>Add User</button>
+    </a>
+</div>
+
+<br>
+
+<div sec:authorize="hasRole('ROLE_USER')">
+    <a href="/user">
+        <button>View My Personal Data</button>
+    </a>
+</div>
+
+<br><br><br><br><br><br>
+
+<div>
+    <form action="/logout">
+        <button>LOGOUT</button>
+    </form>
+</div>
+
+</body>
+</html>

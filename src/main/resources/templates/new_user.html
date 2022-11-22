@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new User</title>
+</head>
+<body>
+
+<h3> PLEASE FILL NEW USER FORM:</h3>
+
+<br>
+
+<form th:action="@{/admin/new_save}" th:object="${new_user}" th:method="post">
+
+    <div>
+        <label for="name">Name: </label>
+        <input type="text" th:field="*{name}" id="name">
+    </div>
+
+    <br>
+
+    <div>
+        <label for="username">Surname: </label>
+        <input type="text" th:field="*{surname}" id="surname">
+    </div>
+
+    <br>
+
+    <div>
+        <label for="username">Username: </label>
+        <input type="text" th:field="*{username}" id="username">
+    </div>
+
+    <br>
+
+    <div>
+        <label for="password">Password: </label>
+        <input type="password" th:field="*{password}" id="password">
+    </div>
+
+    <br>
+
+    <div>
+        <th:block th:each="role : ${all_roles}">
+            <div>
+                <input th:type="checkbox" th:field="*{roles}" th:text="${role.roleName}" th:value="${role.id}" />
+            </div>
+        </th:block>
+    </div>
+
+    <br>
+    <br/>
+
+    <input type="submit" value="Save User"/>
+</form>
+
+<br>
+
+<div>
+    <a href="/admin">
+        <button>Return to Users List</button>
+    </a>
+</div>
+
+<br><br><br><br><br><br>
+
+<div>
+    <form action="/logout">
+        <button>LOGOUT</button>
+    </form>
+</div>
+
+</body>
+</html>

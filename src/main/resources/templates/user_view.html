@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>USERS PAGE</title>
+</head>
+<body>
+
+<div>
+    <h2>Welcome back, <a th:text="${current_user.getName()}"></a>!</h2>
+</div>
+
+<br>
+
+<div>
+    <table border="1" , style="width:600px">
+        <thread>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Login</th>
+                <th>Password</th>
+            </tr>
+        </thread>
+        <tbody>
+        <th:block th:object="${current_user}">
+            <td th:text="${current_user.getId()}">...</td>
+            <td th:text="${current_user.getName()}">...</td>
+            <td th:text="${current_user.getSurname()}">...</td>
+            <td th:text="${current_user.getUsername()}">...</td>
+            <td th:text="${current_user.getPassword()}">...</td>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+<div sec:authorize="hasAnyRole('ROLE_ADMIN')">
+    <a href="/admin">
+        <button>Return to Users List</button>
+    </a>
+</div>
+
+<br><br><br><br><br><br>
+
+<div>
+    <form action="/logout">
+        <button>LOGOUT</button>
+    </form>
+</div>
+</body>
+</html>
