@@ -16,7 +16,6 @@ public class RoleServiceImpl implements RoleService {
     private RoleDao roleDao;
 
     @Override
-    @Transactional
     public List<Role> listRoles() {
         return roleDao.listRoles();
     }
