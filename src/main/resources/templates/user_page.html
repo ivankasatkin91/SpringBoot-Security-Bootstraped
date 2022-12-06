@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Info</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="webjars/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+<!-- ===================== PAGE HEADER =====================-->
+<div class="container-fluid min-vh-100 d-flex flex-column">
+    <div class="row" style="height:35px">
+
+        <!-- ===================== HEADER LEFT PANEL =====================-->
+        <div class="col-md-11 bg-dark text-white">
+        <span class="align-middle">
+          <strong> <a th:text="${current_user.getUsername()}"> </a> </strong>
+          with roles:
+            <a th:text="${current_user.getAssignedRoles()}"></a>
+        </span>
+        </div>
+
+        <!-- ===================== HEADER LOGOUT PANEL ===================== -->
+        <div class="col-md-1 bg-dark text-right">
+        <span class="align-middle">
+          <a href="/logout" class="text-decoration-none text-muted">
+            Logout
+          </a>
+        </span>
+        </div>
+    </div>
+
+    <!-- ===================== MAIN BODY ==================== -->
+    <div class="row flex-grow-1">
+
+        <!-- ===================== SIDEBAR ==================== -->
+        <div class="col-md-2 px-0" style="padding-top:15px">
+            <ul class="d-grid nav flex-column nav-pills">
+
+                <div sec:authorize="hasRole('ADMIN')">
+                <li class="nav-item text-left">
+                    <a class="nav-link" th:href="@{/admin}">
+                        Admin
+                    </a>
+                </li>
+                </div>
+
+                <li class="nav-item active text-left">
+                    <a class="nav-link active" href="#">
+                        User
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- ===================== MAIN PANEL ==================== -->
+        <div class="col-md-10" style="background-color:rgba(211,211,211,0.2)">
+            <div style="padding:15px">
+
+                <!-- ===================== USER INFORMATION PAGE ==================== -->
+                <div class="tab-pane" id="personal-user-panel">
+                    <div>
+                        <h1>User-information page</h1>
+                    </div>
+
+                    <table class="table bg-white">
+                        <caption class="border border-4" style="caption-side:top; padding-left:15px"><h5>About user</h5>
+                        </caption>
+                        <tbody>
+                        <tr>
+                            <td>
+
+                                <table class="table table-striped">
+
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Username</th>
+                                        <th>Password</th>
+                                        <th>Roles</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td th:text="${current_user.getId()}"></td>
+                                        <td th:text="${current_user.getName()}"></td>
+                                        <td th:text="${current_user.getSurname()}"></td>
+                                        <td th:text="${current_user.getUsername()}"></td>
+                                        <td th:text="${current_user.getPassword()}"></td>
+                                        <td th:text="${current_user.getAssignedRoles()}"> </td>
+<!--                                        <td th:each="role : ${current_user.getRoles()}">-->
+<!--                                            <a th:text="${role.getAuthorityName()}"> </a>-->
+<!--                                        </td>-->
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
